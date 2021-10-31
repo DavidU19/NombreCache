@@ -11,10 +11,27 @@ namespace NombreCache
 {
     class Program
     {
+        static int essai = 0;
+        static void gestionSaisie()
+        {
+            int correct = 0; 
+            while (correct != 1)
+            {
+                try
+                {
+                    Console.Write("Entrez le nombre à chercher = ");
+                    essai = int.Parse(Console.ReadLine()); // le nombre à chercher 
+                    correct = 1;
+                }
+                catch
+                {
+                    Console.WriteLine("Vous avez fait une erreur de saisie, veuillez choisir un nombre entier ");
+                }
+            }
+        }
         static void Main(string[] args)
         {
             int nombreCache = 0;
-            int essai = 0;
             int compteur = 1;
             int correct = 0;
             //tour du joueur 1
@@ -34,19 +51,8 @@ namespace NombreCache
             Console.Clear(); // permet d'effacer la console, pour que le deuxième joueur ne voit pas ce que le nombre du premier
             correct = 0;
             // tour du joueur 2
-            while (correct != 1)
-            {
-                try
-                {
-                    Console.Write("Entrez votre essai : ");
-                    essai = int.Parse(Console.ReadLine());
-                    correct = 1;
-                }
-                catch
-                {
-                    Console.WriteLine("Vous avez fait une erreur de saisie, veuillez choisir un nombre entier "); 
-                }
-            }
+            // saisie du premier essai (avec la fonction) 
+            gestionSaisie();
             // test de comparaison entre le nombre caché et l'essai 
             while (nombreCache != essai)
             {
@@ -62,19 +68,7 @@ namespace NombreCache
                     Console.WriteLine("Trop petit");
                     compteur += 1;
                 }
-                while (correct != 1)
-                {
-                    try
-                    {
-                        Console.Write("Entrez un nouvel essai :");
-                        essai = int.Parse(Console.ReadLine());
-                        correct = 1;
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Vous avez fait une erreur de saisie, veuillez saisir un nombre entier naturel ");
-                    }
-                }
+                gestionSaisie();
 
             }
             Console.WriteLine("Bien joué ! Vosu avez trouvez le nombre caché "+"("+nombreCache+")");
