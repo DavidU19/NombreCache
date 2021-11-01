@@ -11,16 +11,16 @@ namespace NombreCache
 {
     class Program
     {
-        static int essai = 0;
-        static void gestionSaisie()
+        static int gestionSaisie(string message)
         {
+            int nombre = 0; 
             int correct = 0; 
             while (correct != 1)
             {
                 try
                 {
-                    Console.Write("Entrez le nombre à chercher = ");
-                    essai = int.Parse(Console.ReadLine()); // le nombre à chercher 
+                    Console.Write(message + "= " );
+                    nombre = int.Parse(Console.ReadLine()); // le nombre à chercher 
                     correct = 1;
                 }
                 catch
@@ -28,36 +28,25 @@ namespace NombreCache
                     Console.WriteLine("Vous avez fait une erreur de saisie, veuillez choisir un nombre entier ");
                 }
             }
+            return nombre; 
         }
         static void Main(string[] args)
         {
             int nombreCache = 0;
+            int essai = 0;
             int compteur = 1;
-            int correct = 0;
+           
+            
             //tour du joueur 1
-            while (correct != 1)
-            {
-                try
-                {
-                    Console.Write("Entrez le nombre à chercher = ");
-                    nombreCache = int.Parse(Console.ReadLine()); // le nombre à chercher 
-                    correct = 1;
-                }
-                catch
-                {
-                    Console.WriteLine("Vous avez fait une erreur de saisie, veuillez choisir un nombre entier ");
-                }
-            }
+            nombreCache = gestionSaisie("Entrez le nombre caché"); // fonction 
             Console.Clear(); // permet d'effacer la console, pour que le deuxième joueur ne voit pas ce que le nombre du premier
-            correct = 0;
+            
+            
             // tour du joueur 2
-            // saisie du premier essai (avec la fonction) 
-            gestionSaisie();
+            essai = gestionSaisie("Entrez le nombre à chercher"); // fonction
             // test de comparaison entre le nombre caché et l'essai 
             while (nombreCache != essai)
             {
-                correct = 0;
-
                 if (nombreCache < essai)
                 {
                     Console.WriteLine("Trop grand !");
@@ -68,7 +57,7 @@ namespace NombreCache
                     Console.WriteLine("Trop petit");
                     compteur += 1;
                 }
-                gestionSaisie();
+                essai = gestionSaisie("Entrez le nombre à chercher"); // fonction 
 
             }
             Console.WriteLine("Bien joué ! Vosu avez trouvez le nombre caché "+"("+nombreCache+")");
